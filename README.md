@@ -32,18 +32,30 @@ Internet → Raspberry Pi → Comfast AP → WiFi Clients
 
 ## 🚀 Installation
 
-### 1. Quick Install
+### 1. Remove Old System (if upgrading)
 ```bash
-# Clone or copy files to Pi
+# If you have an old WasteFi installation, remove it first
+sudo ./remove_old_system.sh
+
+# Reboot after cleanup (recommended)
+sudo reboot
+```
+
+### 2. Fresh Install
+```bash
+# Copy wastefi-clean files to Pi
 cd /home/pi
-git clone <repository> wastefi
-cd wastefi
+# (transfer wastefi-clean folder here)
+cd wastefi-clean
+
+# Test system readiness
+./test.sh
 
 # Run installer (will ask for sudo password)
 sudo ./install.sh
 ```
 
-### 2. Manual Setup (if needed)
+### 3. Manual Setup (if needed)
 ```bash
 # Make install script executable
 chmod +x install.sh
@@ -188,11 +200,21 @@ wastefi/
 
 ## 🚫 Uninstall
 
+### Remove Current Installation
 ```bash
 sudo ./uninstall.sh
 ```
 
-Note: This will restore original network configurations but won't automatically remove iptables rules for safety.
+### Complete System Cleanup (for upgrades)
+```bash
+# Removes ALL WasteFi traces and resets network configs
+sudo ./remove_old_system.sh
+
+# Reboot recommended after cleanup
+sudo reboot
+```
+
+Note: `uninstall.sh` removes the current installation but preserves some configs. `remove_old_system.sh` does a complete cleanup and resets everything to defaults.
 
 ## 📞 Support
 
